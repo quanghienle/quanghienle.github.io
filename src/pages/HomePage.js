@@ -4,41 +4,53 @@ import { Grid, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-    padding: "10px",
+    height: "calc(100vh - 100px)",
+  },
+  info: {
+    margin: "auto",
   },
   image: {
-    objectFit: "fill",
-    height: "50%",
-    mixBlendMode: "multiply",
+    height: "100%",
+    width: "100%",
+    objectFit: "contain",
   },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  },
+    link: {
+        padding: "10px",
+    },
+    linkContainer: {
+        margin: "20px 10px",
+    },
 }));
 export default function HomePage(props) {
   const classes = useStyles();
+  const { texts, imageUrl, links } = props;
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={6}>
-          <img
-            src="/home-avatar.png"
-            alt="what"
-            className={classes.image}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="body1" color="textSecondary">
-            Hi there,
-          </Typography>
-          <Typography variant="h3">I AM HIEN LE</Typography>
-          <Typography variant="h6">SOFTWARE DEVELOPER</Typography>
-        </Grid>
+    <Grid className={classes.root} container spacing={3}>
+      <Grid item xs={7}>
+        <img src={imageUrl} alt="avatar" className={classes.image} />
       </Grid>
-    </div>
+      <Grid className={classes.info} item xs={5}>
+        {texts.map((line, lineIndex) => (
+          <Typography key={`info-line-${lineIndex}`} variant={line.variant}>
+            {line.text}
+          </Typography>
+        ))}
+
+        <div className={classes.linkContainer}>
+          {links.map((link, linkIndex) => (
+            <a
+              key={`link-${linkIndex}`}
+                className={classes.link}
+              href={link.link}
+              rel="noreferrer"
+              target="_blank"
+            >
+              {link.icon}
+            </a>
+          ))}
+        </div>
+      </Grid>
+    </Grid>
   );
 }

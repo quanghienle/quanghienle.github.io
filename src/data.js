@@ -1,5 +1,7 @@
 import HomeIcon from "@material-ui/icons/Home";
 import WorkIcon from "@material-ui/icons/Work";
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import BuildIcon from "@material-ui/icons/Build";
 import ContactMailIcon from "@material-ui/icons/ContactMail";
 import ExperiencePage from "./pages/ExperiencePage.js";
@@ -67,35 +69,68 @@ const experiences = [
   },
 ];
 
+const profile = {
+    texts: [
+        {
+            text: "Hi there,",
+            variant: "body1",
+            color: "",
+        },
+        {
+            text: "I AM HIEN LE",
+            variant: "h3",
+            color: "",
+        },
+        {
+            text: "SOFTWARE DEVELOPER",
+            variant: "h6",
+            color: "",
+        },
+    ],
+    image: "/home-avatar.png",
+    links: [
+        {
+            name: "LinkedIn",
+            icon: <LinkedInIcon style={{fontSize: "50px"}} />,
+            link: "https://www.linkedin.com/in/quanghienle/",
+        },
+        {
+            name: "GitHub",
+            icon: <GitHubIcon style={{fontSize: "50px"}} />,
+            link: "https://github.com/quanghienle",
+        },
+    ],
+};
+
 export const pages = [
   {
     name: "HOME",
     icon: (className) => <HomeIcon className={className} />,
-    backgroundImage: `url(${"/grey-wallpaper.jpeg"})`,
-      page: <HomePage />,
+    backgroundImage: `url(${"/light-grey-wallpaper.jpeg"})`,
+      page: <HomePage texts={profile.texts} imageUrl={profile.image} links={profile.links}/>,
   },
   {
     name: "EDUCATION",
     icon: (className) => <HomeIcon className={className} />,
-    backgroundImage: `url(${"/grey-wallpaper.jpeg"})`,
+    backgroundImage: `url(${"/light-grey-wallpaper.jpeg"})`,
     page: "",
   },
   {
     name: "EXPERIENCE",
     icon: (className) => <WorkIcon className={className} />,
-    backgroundImage: `url(${"/grey-wallpaper.jpeg"})`,
+    backgroundImage: `url(${"/light-grey-wallpaper.jpeg"})`,
     page: <ExperiencePage experiences={experiences} />,
   },
   {
     name: "PROJECTS",
     icon: (className) => <BuildIcon className={className} />,
-    backgroundImage: `url(${"/grey-wallpaper.jpeg"})`,
+    backgroundImage: `url(${"/light-grey-wallpaper.jpeg"})`,
     page: "",
   },
   {
     name: "CONTACT",
     icon: (className) => <ContactMailIcon className={className} />,
-    backgroundImage: `url(${"/grey-wallpaper.jpeg"})`,
+    backgroundImage: `url(${"/light-grey-wallpaper.jpeg"})`,
     page: "",
   },
 ];

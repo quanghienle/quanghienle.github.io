@@ -14,6 +14,10 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 const useStyles = makeStyles((theme) => ({
+  main: {
+    padding: "20px",
+      margin: 0
+  },
   paper: {
     padding: "6px 16px",
     width: "100%",
@@ -26,10 +30,11 @@ const useStyles = makeStyles((theme) => ({
     width: "150px",
   },
   timelineConnector: {
-    backgroundColor: theme.palette.grey.main,
+    backgroundColor: theme.palette.primary.dark,
   },
   timelineDot: {
     padding: 0,
+    backgroundColor: theme.palette.primary.light,
   },
 }));
 
@@ -67,7 +72,7 @@ function DetailExpand(props) {
           className={classes.boldText}
         >
           {info.jobTitle}
-          {isExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          {isExpanded ? <ExpandMoreIcon /> : <ExpandLessIcon />}
         </Typography>
         <Typography align="left" variant="h6" color="textSecondary">
           {info.companyName}
@@ -83,7 +88,7 @@ export default function ExperiencePage(props) {
   const classes = useStyles();
 
   return (
-    <Timeline>
+    <Timeline className={classes.main}>
       {experiences.map((exp, index) => {
         return (
           <TimelineItem key={`timeline-item-${index}`}>
@@ -95,8 +100,9 @@ export default function ExperiencePage(props) {
               </Typography>
             </TimelineOppositeContent>
 
+
             <TimelineSeparator>
-              <TimelineDot color="grey" className={classes.timelineDot}>
+              <TimelineDot className={classes.timelineDot}>
                 <Avatar alt={exp.companyName} src={exp.companyLogo} />
               </TimelineDot>
               {index !== experiences.length - 1 ? (
@@ -105,6 +111,7 @@ export default function ExperiencePage(props) {
                 ""
               )}
             </TimelineSeparator>
+
 
             <TimelineContent>
               <DetailExpand
