@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
   },
   image: {
-    height: "100%",
+    maxHeight: "calc(100vh - 100px)",
     width: "100%",
     objectFit: "contain",
   },
