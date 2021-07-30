@@ -9,14 +9,23 @@ import {
   TimelineOppositeContent,
   TimelineDot,
 } from "@material-ui/lab";
-import { Paper, Typography, Avatar, Button } from "@material-ui/core";
+import {
+  Paper,
+  Typography,
+  Avatar,
+  Button,
+  Zoom,
+  Fade,
+  Grow,
+  Slide,
+} from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 const useStyles = makeStyles((theme) => ({
   main: {
     padding: "20px",
-      margin: 0
+    margin: 0,
   },
   paper: {
     padding: "6px 16px",
@@ -66,11 +75,7 @@ function DetailExpand(props) {
       onClick={handleExpand}
     >
       <Paper elevation={5} className={classes.paper}>
-        <Typography
-          align="left"
-          variant="h5"
-          className={classes.boldText}
-        >
+        <Typography align="left" variant="h5" className={classes.boldText}>
           {info.jobTitle}
           {isExpanded ? <ExpandMoreIcon /> : <ExpandLessIcon />}
         </Typography>
@@ -86,40 +91,61 @@ function DetailExpand(props) {
 export default function ExperiencePage(props) {
   const { experiences } = props;
   const classes = useStyles();
+  const [didMount, setDidMount] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!didMount) {
+      setDidMount(true);
+    }
+  });
 
   return (
     <Timeline className={classes.main}>
       {experiences.map((exp, index) => {
+        const delay1 = index * 200;
+        const delay2 = index * 400;
+        const transitionProps = (delay) => ({
+          in: didMount,
+          timeout: 1000,
+          style: { transitionDelay: `${delay}ms` },
+        });
+        const connector =
+          index !== experiences.length - 1 ? (
+            <TimelineConnector className={classes.timelineConnector} />
+          ) : null;
+
         return (
           <TimelineItem key={`timeline-item-${index}`}>
             <TimelineOppositeContent className={classes.oppositeContent}>
-              <Typography variant="body2" color="textSecondary">
-                {`${exp.fromDate} - ${exp.toDate}`}
-                <br />
-                {exp.location}
-              </Typography>
+              <Fade {...transitionProps(delay2)}>
+                <Typography variant="body2" color="textSecondary">
+                  {`${exp.fromDate} - ${exp.toDate}`}
+                  <br />
+                  {exp.location}
+                </Typography>
+              </Fade>
             </TimelineOppositeContent>
 
-
             <TimelineSeparator>
-              <TimelineDot className={classes.timelineDot}>
-                <Avatar alt={exp.companyName} src={exp.companyLogo} />
-              </TimelineDot>
-              {index !== experiences.length - 1 ? (
-                <TimelineConnector className={classes.timelineConnector} />
-              ) : (
-                ""
-              )}
+              <Zoom {...transitionProps(delay1)}>
+                <TimelineDot className={classes.timelineDot}>
+                  <Avatar alt={exp.companyName} src={exp.companyLogo} />
+                </TimelineDot>
+              </Zoom>
+
+                {connector}
+
             </TimelineSeparator>
 
-
-            <TimelineContent>
-              <DetailExpand
-                info={exp}
-                parentIndex={index}
-                showDetails={index === 0}
-              />
-            </TimelineContent>
+            <Fade {...transitionProps(delay2)}>
+              <TimelineContent>
+                <DetailExpand
+                  info={exp}
+                  parentIndex={index}
+                  showDetails={index === 0}
+                />
+              </TimelineContent>
+            </Fade>
           </TimelineItem>
         );
       })}
