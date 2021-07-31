@@ -35,7 +35,8 @@ export default function HomePage(props) {
     if (!didMount) {
       setDidMount(true);
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Grid className={classes.root} container spacing={3}>

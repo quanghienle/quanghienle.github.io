@@ -3,7 +3,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 
 const common = {
   logo: "/logo.png",
-  appTitle: "My Porfolio",
+  appTitle: "HL",
   accentColor: "#7717F6",
 };
 

@@ -70,7 +70,14 @@ export default function App() {
     if (!didMount) {
       setDidMount(true);
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  React.useEffect(() => {
+    if (!didMount) {
+      setDidMount(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div

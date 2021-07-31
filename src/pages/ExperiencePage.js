@@ -16,8 +16,6 @@ import {
   Button,
   Zoom,
   Fade,
-  Grow,
-  Slide,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
@@ -97,7 +95,8 @@ export default function ExperiencePage(props) {
     if (!didMount) {
       setDidMount(true);
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Timeline className={classes.main}>
