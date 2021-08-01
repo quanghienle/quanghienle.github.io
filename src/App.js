@@ -9,13 +9,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     minHeight: "100vh",
-    // backgroundSize: "cover",
+    backgroundSize: "cover",
     // backgroundPosition: "center",
     // backgroundImage: `url(${"/home-background.jpeg"})`,
   },
   appBar: {
     paddingRight: "50px",
     fontWeight: "bold",
+    backgroundColor: common.navbarBackground
     // backgroundColor: "rgb(102, 42, 223, 0.5)",
     // backdropFilter: "blur(30px)",
   },
@@ -25,6 +26,36 @@ const useStyles = makeStyles((theme) => ({
   },
   pageIcon: {
     marginRight: theme.spacing(2),
+  },
+  navItem: {
+    "&::before, &::after": {
+      position: "absolute",
+      left: "0px",
+      width: "100%",
+      height: "2px",
+      background: common.navbarText,
+      content: "''",
+      opacity: 0,
+      transition: "all 0.3s"
+    },
+    "&::before": {
+      top: "0px",
+      transform: "translateY(10px)"
+    },
+    "&::after": {
+      bottom: "0px",
+      transform: "translateY(-10px)"
+    },
+    "&:hover": {
+      "&::after": {
+        opacity: 0.6,
+        transform: "translateY(-5px)"
+      },
+      "&::before": {
+        opacity: 0.6,
+        transform: "translateY(5px)"
+      }
+    }
   },
   image: {
     height: "64px",
@@ -72,12 +103,6 @@ export default function App() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  React.useEffect(() => {
-    if (!didMount) {
-      setDidMount(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div
@@ -100,17 +125,19 @@ export default function App() {
             {pages.map((page, pageIndex) => {
               const style =
                 page.name === currentPage.name
-                  ? { color: common.accentColor, fontWeight: "bold" }
-                  : { color: "black" };
+                  ? { color: common.navbarSelected, fontWeight: 900 }
+                  : { color: common.navbarText };
               return (
                 <Button
                   key={`app-bar-button-${pageIndex}`}
+                  style={{backgroundColor: common.navbarBackground}}
                   color="inherit"
                   size="large"
-                  style={style}
                   onClick={() => setCurrentPage(page)}
                 >
-                  {page.name}
+                  <span style={style} className={classes.navItem} >
+                    {page.name}
+                  </span>
                 </Button>
               );
             })}

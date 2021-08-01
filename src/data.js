@@ -2,9 +2,13 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import GitHubIcon from "@material-ui/icons/GitHub";
 
 const common = {
-  logo: "/logo.png",
+  logo: "/logo-white.png",
   appTitle: "HL",
-  accentColor: "#7717F6",
+  accentColor: "#5c5c8a",
+  navbarBackground: "#5c5c8a",
+  navbarText: "rgb(255,255,255,0.5)",
+  navbarSelected: "white"
+
 };
 
 const experiences = [
