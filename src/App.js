@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: 'white',
     fontWeight: "bold",
   },
   pageIcon: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       left: "0px",
       width: "100%",
-      height: "2px",
+      height: "1px",
       background: common.navbarText,
       content: "''",
       opacity: 0,

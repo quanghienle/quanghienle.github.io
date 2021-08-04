@@ -3,7 +3,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 
 const common = {
   logo: "/logo-white.png",
-  appTitle: "HL",
+  appTitle: "Work In Progress",
   accentColor: "#5c5c8a",
   navbarBackground: "#5c5c8a",
   navbarText: "rgb(255,255,255,0.5)",

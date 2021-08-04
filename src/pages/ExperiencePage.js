@@ -80,7 +80,7 @@ function DetailExpand(props) {
         <Typography align="left" variant="h6" color="textSecondary">
           {info.companyName}
         </Typography>
-        {isExpanded ? detailsList : ""}
+        {isExpanded && detailsList}
       </Paper>
     </Button>
   );
@@ -108,10 +108,6 @@ export default function ExperiencePage(props) {
           timeout: 1000,
           style: { transitionDelay: `${delay}ms` },
         });
-        const connector =
-          index !== experiences.length - 1 ? (
-            <TimelineConnector className={classes.timelineConnector} />
-          ) : null;
 
         return (
           <TimelineItem key={`timeline-item-${index}`}>
@@ -131,9 +127,9 @@ export default function ExperiencePage(props) {
                   <Avatar alt={exp.companyName} src={exp.companyLogo} />
                 </TimelineDot>
               </Zoom>
-
-                {connector}
-
+              {index !== experiences.length - 1 && (
+                <TimelineConnector className={classes.timelineConnector} />
+              )}
             </TimelineSeparator>
 
             <Fade {...transitionProps(delay2)}>
