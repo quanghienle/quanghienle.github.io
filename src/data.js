@@ -11,6 +11,16 @@ const common = {
 
 };
 
+const skills = { 
+    'Python': 100,
+    'JavaScript': 100,
+    'HTML/CSS': 100,
+    'PHP': 90,
+    'Java': 80,
+    'C/C++': 70,
+    'Clojure': 80,
+};
+
 const experiences = [
   {
     fromDate: "May 2021",
@@ -19,6 +29,7 @@ const experiences = [
     companyName: "CanadaWheels",
     companyLogo: "/canadawheels.jpeg",
     jobTitle: "Software Developer",
+      showDetails: true,
     details: ["item 1", "item 2", "item 3"],
   },
   {
@@ -28,6 +39,7 @@ const experiences = [
     companyName: "Nokia",
     companyLogo: "/nokia.png",
     jobTitle: "Software Developer CO-OP",
+      showDetails: true,
     details: [
       "Collaborated with back-end developers to add new features to the UI by using TypeScript, React and Redux.",
       "Integrated and configured the backend’s Java application to use log4j as logging mechanism.",
@@ -40,6 +52,7 @@ const experiences = [
     companyName: "Ericsson",
     companyLogo: "/ericsson.png",
     jobTitle: "Front-End Developer CO-OP",
+      showDetails: true,
     details: [
       "Delivered a Proof of Concept and release of a new UI that configures the telecom network monitoring application at runtime.",
       "Wrote a design doc and implemented shareable UI components and pages that increased reusability, testability, performance and consistency by using JavaScript and Web Components.",
@@ -53,6 +66,7 @@ const experiences = [
     companyName: "Carleton University",
     companyLogo: "/carleton.jpeg",
     jobTitle: "Teaching Assistant",
+      showDetails: true,
     details: [
       "Conducted weekly study groups to guide students through the course materials (COMP3007 - Programming Paradigms).",
       "Graded assignments and tests accurately and submitted students’ marks punctually.",
@@ -65,6 +79,7 @@ const experiences = [
     companyName: "Ericsson",
     companyLogo: "/ericsson.png",
     jobTitle: "Front-End Developer CO-OP",
+      showDetails: true,
     details: [
       "Researched for suitable third-party chart libraries to provide top quality design.",
       "Implemented a customizable chart component that visualized the inventory data by using functional programming - ClojureScript.",

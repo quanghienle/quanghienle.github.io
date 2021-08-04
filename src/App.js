@@ -1,9 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Typography, Button, Slide } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Slide } from "@material-ui/core";
 import ExperiencePage from "./pages/ExperiencePage.js";
 import HomePage from "./pages/HomePage.js";
-import { profile, experiences, common } from "./data.js";
+import { common } from "./data.js";
+import TextButton from "./components/TextButton.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,47 +17,17 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     paddingRight: "50px",
     fontWeight: "bold",
-    backgroundColor: common.navbarBackground
+    backgroundColor: common.navbarBackground,
     // backgroundColor: "rgb(102, 42, 223, 0.5)",
     // backdropFilter: "blur(30px)",
   },
   title: {
     flexGrow: 1,
-    color: 'white',
+    color: "white",
     fontWeight: "bold",
   },
   pageIcon: {
     marginRight: theme.spacing(2),
-  },
-  navItem: {
-    "&::before, &::after": {
-      position: "absolute",
-      left: "0px",
-      width: "100%",
-      height: "1px",
-      background: common.navbarText,
-      content: "''",
-      opacity: 0,
-      transition: "all 0.3s"
-    },
-    "&::before": {
-      top: "0px",
-      transform: "translateY(10px)"
-    },
-    "&::after": {
-      bottom: "0px",
-      transform: "translateY(-10px)"
-    },
-    "&:hover": {
-      "&::after": {
-        opacity: 0.6,
-        transform: "translateY(-5px)"
-      },
-      "&::before": {
-        opacity: 0.6,
-        transform: "translateY(5px)"
-      }
-    }
   },
   image: {
     height: "64px",
@@ -69,7 +40,7 @@ const pages = [
   {
     name: "HOME",
     backgroundImage: `url(${"/light-grey-wallpaper.jpeg"})`,
-    page: <HomePage {...profile} />,
+    page: <HomePage />,
   },
   {
     name: "ABOUT",
@@ -79,7 +50,7 @@ const pages = [
   {
     name: "EXPERIENCE",
     backgroundImage: `url(${"/light-grey-wallpaper.jpeg"})`,
-    page: <ExperiencePage experiences={experiences} />,
+    page: <ExperiencePage />,
   },
   {
     name: "PROJECTS",
@@ -115,31 +86,24 @@ export default function App() {
           <Toolbar>
             <img src={common.logo} alt="logo" className={classes.image} />
 
-            <Typography
-              variant="h5"
-              color="textPrimary"
-              className={classes.title}
-            >
+            <Typography variant="h5" className={classes.title}>
               {common.appTitle}
             </Typography>
 
             {pages.map((page, pageIndex) => {
-              const style =
-                page.name === currentPage.name
-                  ? { color: common.navbarSelected, fontWeight: 900 }
-                  : { color: common.navbarText };
+              const { navbarBackground, navbarSelected, navbarText } = common;
+              const key = `navbar-item-${pageIndex}`;
               return (
-                <Button
-                  key={`app-bar-button-${pageIndex}`}
-                  style={{backgroundColor: common.navbarBackground}}
-                  color="inherit"
-                  size="large"
+                <TextButton
+                  key={key}
+                  backgroundColor={navbarBackground}
+                  color={navbarText}
+                  selectedColor={navbarSelected}
                   onClick={() => setCurrentPage(page)}
+                  selected={page.name === currentPage.name}
                 >
-                  <span style={style} className={classes.navItem} >
-                    {page.name}
-                  </span>
-                </Button>
+                  {page.name}
+                </TextButton>
               );
             })}
           </Toolbar>

@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography, Zoom, Grow, Slide, Button } from "@material-ui/core";
+import { profile } from "../data.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function HomePage(props) {
+export default function HomePage() {
   const classes = useStyles();
-  const { name, title, imageUrl, links } = props;
+  const { name, title, imageUrl, links } = profile;
   const [didMount, setDidMount] = React.useState(false);
 
   React.useEffect(() => {
@@ -47,20 +48,23 @@ export default function HomePage(props) {
       </Grid>
       <Grid className={classes.info} item xs={5}>
         <Grow in={didMount} timeout={1500}>
-          <Typography variant="h6" color="textSecondary"> Hi there, </Typography>
+          <Typography variant="h6" color="textSecondary">
+            {" "}
+            Hi there,{" "}
+          </Typography>
         </Grow>
-          <br/>
+        <br />
         <Grow in={didMount} timeout={1500}>
           <Typography variant="h2">
             {"I am "}
             <span className={classes.profileName}> {name} </span>
           </Typography>
         </Grow>
-          <br/>
+        <br />
         <Grow in={didMount} timeout={1500}>
           <Typography variant="h5"> {title} </Typography>
         </Grow>
-          <br/>
+        <br />
 
         <div className={classes.linkContainer}>
           {links.map((link, linkIndex) => (

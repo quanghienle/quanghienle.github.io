@@ -9,85 +9,29 @@ import {
   TimelineOppositeContent,
   TimelineDot,
 } from "@material-ui/lab";
-import {
-  Paper,
-  Typography,
-  Avatar,
-  Button,
-  Zoom,
-  Fade,
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import { Typography, Avatar, Zoom, Fade } from "@material-ui/core";
+import { common, experiences } from "../data";
+import ExpandableCard from "../components/ExpandableCard.js";
 
 const useStyles = makeStyles((theme) => ({
   main: {
     padding: "20px",
     margin: 0,
   },
-  paper: {
-    padding: "6px 16px",
-    width: "100%",
-  },
-  boldText: {
-    fontWeight: "bold",
-  },
   oppositeContent: {
     flex: "none",
     width: "150px",
   },
   timelineConnector: {
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: common.navbarBackground,
   },
   timelineDot: {
     padding: 0,
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: common.navbarBackground,
   },
 }));
 
-function DetailExpand(props) {
-  const classes = useStyles();
-  const { info, parentIndex, showDetails } = props;
-  const [isExpanded, setIsExpanded] = React.useState(!!showDetails);
-
-  const handleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  const detailsList = (
-    <ul>
-      {info.details.map((description, descriptionIndex) => (
-        <li key={`detail-${parentIndex}-${descriptionIndex}`}>
-          <Typography align="left" variant="body1" color="textSecondary">
-            {description}
-          </Typography>
-        </li>
-      ))}
-    </ul>
-  );
-
-  return (
-    <Button
-      color="primary"
-      style={{ width: "100%", textTransform: "none" }}
-      onClick={handleExpand}
-    >
-      <Paper elevation={5} className={classes.paper}>
-        <Typography align="left" variant="h5" className={classes.boldText}>
-          {info.jobTitle}
-          {isExpanded ? <ExpandMoreIcon /> : <ExpandLessIcon />}
-        </Typography>
-        <Typography align="left" variant="h6" color="textSecondary">
-          {info.companyName}
-        </Typography>
-        {isExpanded && detailsList}
-      </Paper>
-    </Button>
-  );
-}
-
-export default function ExperiencePage(props) {
-  const { experiences } = props;
+export default function ExperiencePage() {
   const classes = useStyles();
   const [didMount, setDidMount] = React.useState(false);
 
@@ -111,6 +55,8 @@ export default function ExperiencePage(props) {
 
         return (
           <TimelineItem key={`timeline-item-${index}`}>
+
+            {/* Left side of the timeline */}
             <TimelineOppositeContent className={classes.oppositeContent}>
               <Fade {...transitionProps(delay2)}>
                 <Typography variant="body2" color="textSecondary">
@@ -121,6 +67,8 @@ export default function ExperiencePage(props) {
               </Fade>
             </TimelineOppositeContent>
 
+
+            {/* timeline dots and connectors */}
             <TimelineSeparator>
               <Zoom {...transitionProps(delay1)}>
                 <TimelineDot className={classes.timelineDot}>
@@ -132,15 +80,14 @@ export default function ExperiencePage(props) {
               )}
             </TimelineSeparator>
 
+
+            {/* Right side of the timeline */}
             <Fade {...transitionProps(delay2)}>
               <TimelineContent>
-                <DetailExpand
-                  info={exp}
-                  parentIndex={index}
-                  showDetails={index === 0}
-                />
+                <ExpandableCard info={exp} showDetails={exp.showDetails} />
               </TimelineContent>
             </Fade>
+
           </TimelineItem>
         );
       })}
